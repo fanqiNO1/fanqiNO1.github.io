@@ -1,0 +1,63 @@
+---
+import Layout from '../../../../layouts/Layout.astro';
+import { getLangFromUrl, useTranslations } from '../../../../i18n/utils';
+import { getCollection, render } from 'astro:content';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const { series, slug } = Astro.params;
+
+// Load all blog entries and find the matching one
+const blogEntries = await getCollection('blogs');
+const blogEntry = blogEntries.find(entry => entry.id === `${series}/${slug}/main`);
+
+// Render the content if found
+const { Content } = blogEntry ? await render(blogEntry) : { Content: null };
+
+// Get series data for navigation
+const seriesData: Record<string, any> = {
+  'deep-learning': {
+    title: '深度学习系列',
+  },
+  'paper-notes': {
+    title: '论文阅读笔记',
+  },
+};
+
+export async function getStaticPaths() {
+  const blogs = await getCollection('blogs');
+  return blogs.map(entry => {
+    const parts = entry.id.split('/');
+    return {
+      params: {
+        series: parts[0],
+        slug: parts[1],
+      },
+    };
+  });
+}
+---
+
+<Layout title={blogEntry?.data.title || 'Blog Post'}>
+  <div class="mb-6">
+    <a href={`/zh/blogs/${series}`} class="text-sm text-blue-600 dark:text-blue-400 hover:underline">
+      ← {seriesData[series as string]?.title || series}
+    </a>
+  </div>
+
+  <article class="prose dark:prose-invert max-w-none">
+    <header class="mb-8">
+      <h1 class="text-3xl font-bold mb-4">{blogEntry?.data.title}</h1>
+      <div class="flex items-center gap-4 text-sm text-gray-500 dark:text-gray-500">
+        <span>{blogEntry?.data.date.toLocaleDateString(lang === 'zh' ? 'zh-CN' : 'en-US')}</span>
+        <span>·</span>
+        <span>{blogEntry?.data.readTime} {t('blogs.minutes')}</span>
+      </div>
+    </header>
+
+    <div class="markdown-content">
+      {Content && <Content />}
+    </div>
+  </article>
+</Layout>

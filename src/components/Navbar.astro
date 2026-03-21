@@ -1,0 +1,80 @@
+---
+import { getLangFromUrl, useTranslations, getLocalizedPath } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const currentPath = Astro.url.pathname;
+
+const navItems = [
+  { path: '/', label: t('nav.about') },
+  { path: '/publications', label: t('nav.publications') },
+  { path: '/projects', label: t('nav.projects') },
+  { path: '/blogs', label: t('nav.blogs') },
+  { path: '/cv', label: t('nav.cv') },
+];
+
+const isActive = (path: string) => {
+  const localizedPath = getLocalizedPath(path, lang);
+  if (path === '/') {
+    return currentPath === localizedPath || currentPath === `${localizedPath}/`;
+  }
+  return currentPath.startsWith(localizedPath);
+};
+---
+
+<nav class="sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between h-16">
+      <!-- Logo/Name -->
+      <div class="flex items-center">
+        <a href={getLocalizedPath('/', lang)} class="text-xl font-bold text-gray-900 dark:text-white">
+          Portfolio
+        </a>
+      </div>
+
+      <!-- Navigation Links -->
+      <div class="flex items-center space-x-8">
+        {navItems.map((item) => (
+          <a
+            href={getLocalizedPath(item.path, lang)}
+            class:list={[
+              'text-sm font-medium transition-colors duration-200',
+              isActive(item.path)
+                ? 'text-blue-600 dark:text-blue-400'
+                : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
+            ]}
+          >
+            {item.label}
+          </a>
+        ))}
+
+        <!-- Language Switcher -->
+        <div class="flex items-center space-x-2 border-l border-gray-200 dark:border-gray-700 pl-4">
+          <a
+            href={currentPath.startsWith('/zh') ? currentPath.replace('/zh', '') || '/' : currentPath}
+            class:list={[
+              'text-sm font-medium transition-colors',
+              lang === 'en'
+                ? 'text-blue-600 dark:text-blue-400'
+                : 'text-gray-400 hover:text-gray-600 dark:hover:text-gray-300'
+            ]}
+          >
+            EN
+          </a>
+          <span class="text-gray-300 dark:text-gray-600">/</span>
+          <a
+            href={currentPath.startsWith('/zh') ? currentPath.replace('/zh', '') || '/' : `/zh${currentPath}`}
+            class:list={[
+              'text-sm font-medium transition-colors',
+              lang === 'zh'
+                ? 'text-blue-600 dark:text-blue-400'
+                : 'text-gray-400 hover:text-gray-600 dark:hover:text-gray-300'
+            ]}
+          >
+            中文
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>

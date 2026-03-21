@@ -1,0 +1,55 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const cvFile = '/cv/cv-zh.pdf';
+---
+
+<Layout title={t('nav.cv')}>
+  <h1 class="text-3xl font-bold mb-8">{t('nav.cv')}</h1>
+
+  <!-- PDF Preview -->
+  <div class="bg-white dark:bg-gray-900 rounded-lg shadow-sm border border-gray-200 dark:border-gray-800 overflow-hidden">
+    <div class="flex items-center justify-between px-6 py-4 border-b border-gray-200 dark:border-gray-800">
+      <div class="flex items-center gap-4">
+        <span class="text-sm font-medium text-blue-600 dark:text-blue-400">
+          中文简历
+        </span>
+        <span class="text-gray-300 dark:text-gray-600">|</span>
+        <a
+          href="/cv"
+          class="text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+        >
+          English CV
+        </a>
+      </div>
+      <a
+        href={cvFile}
+        target="_blank"
+        class="text-sm text-blue-600 dark:text-blue-400 hover:underline"
+      >
+        {t('cv.openInNewTab')}
+      </a>
+    </div>
+
+    <div class="w-full aspect-[1/1.414] bg-gray-100 dark:bg-gray-800">
+      <object
+        data={cvFile}
+        type="application/pdf"
+        class="w-full h-full"
+      >
+        <div class="flex items-center justify-center h-full text-gray-500 dark:text-gray-400">
+          <p class="text-center">
+            无法显示 PDF 预览<br>
+            <a href={cvFile} target="_blank" class="text-blue-600 dark:text-blue-400 hover:underline">
+              点击此处在新标签页打开
+            </a>
+          </p>
+        </div>
+      </object>
+    </div>
+  </div>
+</Layout>

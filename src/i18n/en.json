@@ -1,0 +1,43 @@
+{
+  "nav": {
+    "about": "About",
+    "publications": "Publications",
+    "projects": "Projects",
+    "blogs": "Blogs",
+    "cv": "CV"
+  },
+  "sidebar": {
+    "tagline": "Tagline",
+    "location": "Location",
+    "school": "School",
+    "links": "Links",
+    "googleScholar": "Google Scholar",
+    "orcid": "ORCID",
+    "github": "GitHub",
+    "zhihu": "Zhihu"
+  },
+  "publications": {
+    "title": "Publications",
+    "authors": "Authors",
+    "conference": "Conference",
+    "links": "Links"
+  },
+  "projects": {
+    "title": "Projects",
+    "description": "Description",
+    "stars": "Stars"
+  },
+  "blogs": {
+    "title": "Blog Archives",
+    "series": "Series",
+    "lastUpdated": "Last Updated",
+    "readTime": "Read Time",
+    "minutes": "min"
+  },
+  "cv": {
+    "title": "Curriculum Vitae",
+    "openInNewTab": "Open in new tab",
+    "switchZh": "中文简历",
+    "switchEn": "English CV"
+  }
+}

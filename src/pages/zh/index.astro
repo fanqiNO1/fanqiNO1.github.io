@@ -1,0 +1,22 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+import { getCollection, render } from 'astro:content';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+// Load about content from collection
+const aboutEntries = await getCollection('about');
+const aboutEntry = aboutEntries.find(entry => entry.data.lang === lang);
+const { Content } = aboutEntry ? await render(aboutEntry) : { Content: null };
+---
+
+<Layout title={t('nav.about')}>
+  <div class="prose dark:prose-invert max-w-none">
+    <h1 class="text-3xl font-bold mb-6">{t('nav.about')}</h1>
+    <div class="markdown-content">
+      {Content && <Content />}
+    </div>
+  </div>
+</Layout>

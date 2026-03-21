@@ -1,0 +1,25 @@
+{
+  "name": {
+    "zh": "你的名字",
+    "en": "Your Name"
+  },
+  "tagline": {
+    "zh": "机器学习研究员 | 热爱开源",
+    "en": "ML Researcher | Open Source Enthusiast"
+  },
+  "avatar": "/images/avatar.jpg",
+  "location": {
+    "zh": "中国，北京",
+    "en": "Beijing, China"
+  },
+  "school": {
+    "zh": "XX大学",
+    "en": "XX University"
+  },
+  "links": {
+    "googleScholar": "https://scholar.google.com/citations?user=YOUR_ID",
+    "orcid": "https://orcid.org/0000-0000-0000-0000",
+    "github": "https://github.com/YOUR_USERNAME",
+    "zhihu": "https://www.zhihu.com/people/YOUR_USERNAME"
+  }
+}

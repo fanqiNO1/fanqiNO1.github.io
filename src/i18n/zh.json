@@ -1,0 +1,43 @@
+{
+  "nav": {
+    "about": "关于",
+    "publications": "论文",
+    "projects": "项目",
+    "blogs": "博客",
+    "cv": "简历"
+  },
+  "sidebar": {
+    "tagline": "一句话描述",
+    "location": "地址",
+    "school": "学校",
+    "links": "链接",
+    "googleScholar": "Google Scholar",
+    "orcid": "ORCID",
+    "github": "GitHub",
+    "zhihu": "知乎"
+  },
+  "publications": {
+    "title": "论文发表",
+    "authors": "作者",
+    "conference": "会议",
+    "links": "相关链接"
+  },
+  "projects": {
+    "title": "项目",
+    "description": "介绍",
+    "stars": "星标"
+  },
+  "blogs": {
+    "title": "博客归档",
+    "series": "系列",
+    "lastUpdated": "最近更新",
+    "readTime": "阅读时长",
+    "minutes": "分钟"
+  },
+  "cv": {
+    "title": "个人简历",
+    "openInNewTab": "在新标签页打开",
+    "switchZh": "中文简历",
+    "switchEn": "English CV"
+  }
+}

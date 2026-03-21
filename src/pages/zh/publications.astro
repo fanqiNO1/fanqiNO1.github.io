@@ -1,0 +1,96 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+import { getCollection } from 'astro:content';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+// Load publications
+const publications = await getCollection('publications');
+
+// Sort: selected first (by date desc), then non-selected (by date desc)
+const sortedPublications = publications
+  .map(entry => ({ ...entry.data, id: entry.id }))
+  .sort((a, b) => {
+    // First sort by selected (true comes first)
+    if (a.selected !== b.selected) {
+      return a.selected ? -1 : 1;
+    }
+    // Then sort by date descending
+    return new Date(b.date).getTime() - new Date(a.date).getTime();
+  });
+---
+
+<Layout title={t('nav.publications')}>
+  <h1 class="text-3xl font-bold mb-8">{t('nav.publications')}</h1>
+
+  <div class="space-y-6">
+    {sortedPublications.map((pub) => (
+      <article class="flex gap-6 bg-white dark:bg-gray-900 rounded-lg shadow-sm border border-gray-200 dark:border-gray-800 overflow-hidden hover:shadow-md transition-shadow">
+        <!-- Cover Image -->
+        <div class="relative w-64 flex-shrink-0">
+          <img
+            src={pub.cover}
+            alt={pub.title}
+            class="w-full h-full object-cover aspect-video"
+          />
+          <div class="absolute top-2 left-2">
+            <span class="px-2 py-1 text-xs font-medium bg-blue-600 text-white rounded">
+              {pub.conference}
+            </span>
+          </div>
+        </div>
+
+        <!-- Content -->
+        <div class="flex-1 p-4">
+          <div class="flex items-start justify-between">
+            <div class="flex-1">
+              <h2 class="text-lg font-semibold mb-2">
+                <a href={pub.links.paper} target="_blank" rel="noopener noreferrer"
+                   class="text-blue-600 dark:text-blue-400 hover:underline">
+                  {pub.title}
+                </a>
+              </h2>
+
+              <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">
+                <span class="font-medium">{t('publications.authors')}:</span> {pub.authors.join(', ')}
+              </p>
+
+              <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">
+                <span class="font-medium">{t('publications.conference')}:</span> {pub.conference} {pub.year}
+              </p>
+
+              <div class="flex gap-3">
+                {pub.links.paper && (
+                  <a href={pub.links.paper} target="_blank" rel="noopener noreferrer"
+                     class="text-sm text-blue-600 dark:text-blue-400 hover:underline">
+                    Paper
+                  </a>
+                )}
+                {pub.links.code && (
+                  <a href={pub.links.code} target="_blank" rel="noopener noreferrer"
+                     class="text-sm text-blue-600 dark:text-blue-400 hover:underline">
+                    Code
+                  </a>
+                )}
+                {pub.links.project && (
+                  <a href={pub.links.project} target="_blank" rel="noopener noreferrer"
+                     class="text-sm text-blue-600 dark:text-blue-400 hover:underline">
+                    Project
+                  </a>
+                )}
+              </div>
+            </div>
+            
+            {pub.selected && (
+              <span class="ml-4 px-2 py-1 text-xs font-medium bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200 rounded">
+                Selected
+              </span>
+            )}
+          </div>
+        </div>
+      </article>
+    ))}
+  </div>
+</Layout>
