@@ -4,6 +4,7 @@ series: "深度学习系列"
 date: 2024-03-15
 readTime: 15
 cover: "/images/blog-series/deep-learning.jpg"
+tags: ["Transformer", "NLP", "注意力机制", "深度学习"]
 zhihuLink: "https://zhihu.com/p/example"
 wechatLink: "https://mp.weixin.qq.com/s/example"
 ---

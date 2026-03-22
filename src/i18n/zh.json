@@ -32,7 +32,9 @@
     "series": "系列",
     "lastUpdated": "最近更新",
     "readTime": "阅读时长",
-    "minutes": "分钟"
+    "minutes": "分钟",
+    "zhihu": "知乎",
+    "wechat": "微信"
   },
   "cv": {
     "title": "个人简历",

@@ -4,6 +4,7 @@ series: "深度学习系列"
 date: 2024-03-10
 readTime: 10
 cover: "/images/blog-series/deep-learning.jpg"
+tags: ["CNN", "深度学习", "计算机视觉", "神经网络"]
 zhihuLink: "https://zhihu.com/p/example2"
 ---
 

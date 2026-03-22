@@ -32,7 +32,9 @@
     "series": "Series",
     "lastUpdated": "Last Updated",
     "readTime": "Read Time",
-    "minutes": "min"
+    "minutes": "min",
+    "zhihu": "Zhihu",
+    "wechat": "WeChat"
   },
   "cv": {
     "title": "Curriculum Vitae",
