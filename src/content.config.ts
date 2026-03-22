@@ -49,6 +49,7 @@ const blogs = defineCollection({
     series: z.string(),
     date: z.date(),
     readTime: z.number(),
+    cover: z.string(),
     zhihuLink: z.string().optional(),
     wechatLink: z.string().optional(),
   }),

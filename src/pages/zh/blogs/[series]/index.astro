@@ -52,36 +52,49 @@ export async function getStaticPaths() {
 
   <div class="space-y-4">
     {posts.map((post) => (
-      <article class="bg-white dark:bg-gray-900 rounded-lg shadow-sm border border-gray-200 dark:border-gray-800 p-4 hover:shadow-md transition-shadow">
-        <div class="flex items-start justify-between">
-          <div class="flex-1">
-            <h2 class="text-lg font-semibold mb-2">
-              <a href={`/zh/blogs/${series}/${post.slug}`}
-                 class="text-blue-600 dark:text-blue-400 hover:underline">
-                {post.title}
-              </a>
-            </h2>
-
-            <div class="flex items-center gap-4 text-sm text-gray-500 dark:text-gray-500">
-              <span>{post.date.toLocaleDateString('zh-CN')}</span>
-              <span>·</span>
-              <span>{post.readTime} {t('blogs.minutes')}</span>
-            </div>
+      <article class="bg-white dark:bg-gray-900 rounded-lg shadow-sm border border-gray-200 dark:border-gray-800 overflow-hidden hover:shadow-md transition-shadow">
+        <div class="flex">
+          <!-- Post Cover -->
+          <div class="w-48 flex-shrink-0">
+            <img
+              src={post.cover}
+              alt={post.title}
+              class="w-full h-full object-cover aspect-[4/3]"
+            />
           </div>
+          <!-- Post Content -->
+          <div class="flex-1 p-4">
+            <div class="flex items-start justify-between">
+              <div class="flex-1">
+                <h2 class="text-lg font-semibold mb-2">
+                  <a href={`/zh/blogs/${series}/${post.slug}`}
+                     class="text-blue-600 dark:text-blue-400 hover:underline">
+                    {post.title}
+                  </a>
+                </h2>
 
-          <div class="flex gap-2">
-            {post.zhihuLink && (
-              <a href={post.zhihuLink} target="_blank" rel="noopener noreferrer"
-                 class="text-sm text-blue-600 dark:text-blue-400 hover:underline">
-                知乎
-              </a>
-            )}
-            {post.wechatLink && (
-              <a href={post.wechatLink} target="_blank" rel="noopener noreferrer"
-                 class="text-sm text-green-600 dark:text-green-400 hover:underline">
-                微信
-              </a>
-            )}
+                <div class="flex items-center gap-4 text-sm text-gray-500 dark:text-gray-500">
+                  <span>{post.date.toLocaleDateString('zh-CN')}</span>
+                  <span>·</span>
+                  <span>{post.readTime} {t('blogs.minutes')}</span>
+                </div>
+              </div>
+
+              <div class="flex gap-2 ml-4">
+                {post.zhihuLink && (
+                  <a href={post.zhihuLink} target="_blank" rel="noopener noreferrer"
+                     class="text-sm text-blue-600 dark:text-blue-400 hover:underline">
+                    知乎
+                  </a>
+                )}
+                {post.wechatLink && (
+                  <a href={post.wechatLink} target="_blank" rel="noopener noreferrer"
+                     class="text-sm text-green-600 dark:text-green-400 hover:underline">
+                    微信
+                  </a>
+                )}
+              </div>
+            </div>
           </div>
         </div>
       </article>

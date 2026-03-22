@@ -3,6 +3,7 @@ title: "CNN卷积神经网络入门"
 series: "深度学习系列"
 date: 2029-03-10
 readTime: 10
+cover: "/images/blog-series/deep-learning.jpg"
 zhihuLink: "https://zhihu.com/p/example2"
 ---
 

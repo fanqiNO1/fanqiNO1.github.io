@@ -3,6 +3,7 @@ title: "Transformer架构详解"
 series: "深度学习系列"
 date: 2024-03-15
 readTime: 15
+cover: "/images/blog-series/deep-learning.jpg"
 zhihuLink: "https://zhihu.com/p/example"
 wechatLink: "https://mp.weixin.qq.com/s/example"
 ---

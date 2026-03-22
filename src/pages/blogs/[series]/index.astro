@@ -52,9 +52,18 @@ export async function getStaticPaths() {
 
   <div class="space-y-4">
     {posts.map((post) => (
-      <article class="bg-white dark:bg-gray-900 rounded-lg shadow-sm border border-gray-200 dark:border-gray-800 p-4 hover:shadow-md transition-shadow">
-        <div class="flex items-start justify-between">
-          <div class="flex-1">
+      <article class="bg-white dark:bg-gray-900 rounded-lg shadow-sm border border-gray-200 dark:border-gray-800 overflow-hidden hover:shadow-md transition-shadow">
+        <div class="flex">
+          <!-- Post Cover -->
+          <div class="w-48 flex-shrink-0">
+            <img
+              src={post.cover}
+              alt={post.title}
+              class="w-full h-full object-cover aspect-[4/3]"
+            />
+          </div>
+          <!-- Post Content -->
+          <div class="flex-1 p-4">
             <h2 class="text-lg font-semibold mb-2">
               <a href={`/blogs/${series}/${post.slug}`}
                  class="text-blue-600 dark:text-blue-400 hover:underline">

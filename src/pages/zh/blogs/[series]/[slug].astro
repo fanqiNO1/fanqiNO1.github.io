@@ -48,6 +48,16 @@ export async function getStaticPaths() {
 
   <article class="prose dark:prose-invert max-w-none">
     <header class="mb-8">
+      <!-- Post Cover -->
+      {blogEntry?.data.cover && (
+        <div class="mb-6 rounded-lg overflow-hidden">
+          <img
+            src={blogEntry.data.cover}
+            alt={blogEntry.data.title}
+            class="w-full h-64 object-cover"
+          />
+        </div>
+      )}
       <h1 class="text-3xl font-bold mb-4">{blogEntry?.data.title}</h1>
       <div class="flex items-center gap-4 text-sm text-gray-500 dark:text-gray-500">
         <span>{blogEntry?.data.date.toLocaleDateString(lang === 'zh' ? 'zh-CN' : 'en-US')}</span>
