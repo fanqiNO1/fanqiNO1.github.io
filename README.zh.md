@@ -6,6 +6,7 @@
 
 - **国际化支持**：中文/英文双语切换，基于 URL 路由 (`/zh/` 和 `/en/`)
 - **Markdown 内容**：所有文本内容使用 Markdown 文件存储
+- **博客标签**：支持标签云和按标签筛选文章
 - **响应式设计**：适配桌面和移动设备
 - **深色模式**：自动深色模式支持
 - **PDF 预览**：简历页面内嵌 PDF 查看器
@@ -40,6 +41,7 @@
 │   │   ├── projects.astro      # 项目页面（英文）
 │   │   ├── cv.astro            # 简历页面（英文）
 │   │   ├── blogs/              # 博客页面（英文）
+│   │   │   └── tag/            # 博客标签
 │   │   └── zh/                 # 中文页面
 │   │       ├── index.astro     # 关于页面（中文）
 │   │       ├── publications.astro
@@ -71,6 +73,8 @@
 | 博客 | `/blogs` | `/zh/blogs` |
 | 博客系列 | `/blogs/{series}` | `/zh/blogs/{series}` |
 | 博客文章 | `/blogs/{series}/{slug}` | `/zh/blogs/{series}/{slug}` |
+| 博客标签 | `/blogs/tag` | `/zh/blogs/tag` |
+| 标签筛选 | `/blogs/tag/{tag}` | `/zh/blogs/tag/{tag}` |
 | 简历 | `/cv` | `/zh/cv` |
 
 ## 开发
@@ -226,6 +230,8 @@ title: "博客文章标题"
 series: "系列显示名称"
 date: 2024-03-20
 readTime: 15
+cover: "/images/blog-series/your-series.jpg"  # 可选
+tags: ["标签1", "标签2", "标签3"]  # 可选
 zhihuLink: "https://zhihu.com/p/xxxx"  # 可选
 wechatLink: "https://mp.weixin.qq.com/s/xxxx"  # 可选
 ---
@@ -243,6 +249,23 @@ wechatLink: "https://mp.weixin.qq.com/s/xxxx"  # 可选
 ```
 
 4. 博客文章将自动在 `/zh/blogs/my-series/my-post/` 和 `/en/blogs/my-series/my-post/` 可用
+
+### 博客标签
+
+博客文章支持标签功能，便于更好地组织内容。标签以标签云形式展示在标签页面，并支持按主题筛选文章。
+
+**使用标签的方法：**
+
+1. 在博客文章的 frontmatter 中添加标签：
+```yaml
+tags: ["深度学习", "计算机视觉", "PyTorch"]
+```
+
+2. 在 `/blogs/tag`（中文版本为 `/zh/blogs/tag`）查看所有标签
+
+3. 点击标签查看包含该标签的所有文章
+
+标签云根据文章数量显示不同字体大小，形成热门主题的可视化层次结构。
 
 ### 更新关于页面
 
@@ -308,11 +331,40 @@ lang: zh  # 或 "en" 表示英文
     "cv": "简历"
   },
   "sidebar": {
+    "tagline": "一句话描述",
+    "location": "地址",
+    "school": "学校",
     "links": "链接",
     "googleScholar": "Google Scholar",
     "orcid": "ORCID",
     "github": "GitHub",
     "zhihu": "知乎"
+  },
+  "publications": {
+    "title": "论文发表",
+    "authors": "作者",
+    "conference": "会议",
+    "links": "相关链接"
+  },
+  "projects": {
+    "title": "项目",
+    "description": "介绍",
+    "stars": "星标"
+  },
+  "blogs": {
+    "title": "博客归档",
+    "series": "系列",
+    "lastUpdated": "最近更新",
+    "readTime": "阅读时长",
+    "minutes": "分钟",
+    "zhihu": "知乎",
+    "wechat": "微信"
+  },
+  "cv": {
+    "title": "个人简历",
+    "openInNewTab": "在新标签页打开",
+    "switchZh": "中文简历",
+    "switchEn": "English CV"
   }
 }
 ```

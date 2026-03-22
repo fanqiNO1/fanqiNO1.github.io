@@ -6,6 +6,7 @@ A personal portfolio website built with Astro, featuring i18n support, markdown-
 
 - **i18n Support**: Chinese and English language switching with URL-based routing (`/zh/` and `/en/`)
 - **Markdown Content**: All text content stored in markdown files
+- **Blog Tags**: Tag-based blog organization with tag cloud visualization
 - **Responsive Design**: Works on desktop and mobile devices
 - **Dark Mode**: Automatic dark mode support
 - **PDF Preview**: CV page with embedded PDF viewer
@@ -40,6 +41,7 @@ A personal portfolio website built with Astro, featuring i18n support, markdown-
 │   │   ├── projects.astro      # Projects page (EN)
 │   │   ├── cv.astro            # CV page (EN)
 │   │   ├── blogs/              # Blog pages (EN)
+│   │   │   └── tag/            # Blog tags
 │   │   └── zh/                 # Chinese pages
 │   │       ├── index.astro     # About page (ZH)
 │   │       ├── publications.astro
@@ -71,6 +73,8 @@ A personal portfolio website built with Astro, featuring i18n support, markdown-
 | Blogs | `/blogs` | `/zh/blogs` |
 | Blog Series | `/blogs/{series}` | `/zh/blogs/{series}` |
 | Blog Post | `/blogs/{series}/{slug}` | `/zh/blogs/{series}/{slug}` |
+| Blog Tags | `/blogs/tag` | `/zh/blogs/tag` |
+| Blog Tag Filter | `/blogs/tag/{tag}` | `/zh/blogs/tag/{tag}` |
 | CV | `/cv` | `/zh/cv` |
 
 ## Development
@@ -226,6 +230,8 @@ title: "Blog Post Title"
 series: "Series Display Name"
 date: 2024-03-20
 readTime: 15
+cover: "/images/blog-series/your-series.jpg"  # Optional
+tags: ["Tag1", "Tag2", "Tag3"]  # Optional
 zhihuLink: "https://zhihu.com/p/xxxx"  # Optional
 wechatLink: "https://mp.weixin.qq.com/s/xxxx"  # Optional
 ---
@@ -243,6 +249,23 @@ Write your blog content here using Markdown syntax.
 ```
 
 4. The blog post will be automatically available at `/zh/blogs/my-series/my-post/` and `/en/blogs/my-series/my-post/`
+
+### Blog Tags
+
+Blog posts support tags for better organization. Tags are displayed as a tag cloud on the tags page and allow filtering posts by topic.
+
+**To use tags:**
+
+1. Add tags to your blog post frontmatter:
+```yaml
+tags: ["Deep Learning", "Computer Vision", "PyTorch"]
+```
+
+2. View all tags at `/blogs/tag` (or `/zh/blogs/tag` for Chinese)
+
+3. Click on a tag to see all posts with that tag
+
+The tag cloud shows tags with varying font sizes based on the number of posts, creating a visual hierarchy of popular topics.
 
 ### Updating the About Page
 
@@ -308,11 +331,40 @@ Update translations in `src/i18n/zh.json` and `src/i18n/en.json`:
     "cv": "CV"
   },
   "sidebar": {
+    "tagline": "Tagline",
+    "location": "Location",
+    "school": "School",
     "links": "Links",
     "googleScholar": "Google Scholar",
     "orcid": "ORCID",
     "github": "GitHub",
     "zhihu": "Zhihu"
+  },
+  "publications": {
+    "title": "Publications",
+    "authors": "Authors",
+    "conference": "Conference",
+    "links": "Links"
+  },
+  "projects": {
+    "title": "Projects",
+    "description": "Description",
+    "stars": "Stars"
+  },
+  "blogs": {
+    "title": "Blog Archives",
+    "series": "Series",
+    "lastUpdated": "Last Updated",
+    "readTime": "Read Time",
+    "minutes": "min",
+    "zhihu": "Zhihu",
+    "wechat": "WeChat"
+  },
+  "cv": {
+    "title": "Curriculum Vitae",
+    "openInNewTab": "Open in new tab",
+    "switchZh": "中文简历",
+    "switchEn": "English CV"
   }
 }
 ```
